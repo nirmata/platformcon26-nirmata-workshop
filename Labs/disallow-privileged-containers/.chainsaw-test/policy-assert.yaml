@@ -1,0 +1,13 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-privileged-containers
+spec:
+  validationFailureAction: Enforce
+status:
+  conditions: [
+    {
+      "message": "Ready",
+      "status": "True",
+    }
+  ]

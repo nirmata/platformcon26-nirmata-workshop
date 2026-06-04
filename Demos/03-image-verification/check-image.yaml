@@ -1,0 +1,32 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: check-image
+spec:
+  webhookConfiguration:
+    failurePolicy: Fail
+    timeoutSeconds: 30
+  background: false
+  rules:
+    - name: check-image
+      match:
+        any:
+        - resources:
+            kinds:
+              - Pod
+      verifyImages:
+      - imageReferences:
+        - "index.docker.io/sagarkundral/nginx**"
+        failureAction: Enforce
+        attestors:
+        - count: 1
+          entries:
+          - keys:
+              publicKeys: |-
+                -----BEGIN PUBLIC KEY-----
+                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEAlame2ITvzyyKrvgFWcz3KgWHYsr
+                kWsF088epNjyRui1c4H7IIzxZBnpRRJnRUgVSn06ztPTXphKw33sB/UuUg==
+                -----END PUBLIC KEY-----
+              rekor:
+                ignoreTlog: true
+                url: https://rekor.sigstore.dev
