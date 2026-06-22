@@ -11,6 +11,7 @@ To get the most out of this workshop, you'll need the following:
 * Docker Desktop [Installation Guide](https://docs.docker.com/desktop/)
 * **helm:** To install Kyverno OSS [Install helm](https://helm.sh/docs/intro/install/)
 * An IDE/ vim to customize the policies
+* [Nirmata CLI](https://docs.nirmata.io/docs/nctl/installation/)
 
 ## Kyverno Documentation & Resources
 
@@ -19,10 +20,6 @@ To get the most out of this workshop, you'll need the following:
    * **Kyverno website:** [https://kyverno.io/policies/](https://kyverno.io/policies/) -  A collection of ready-to-use Kyverno policies.
    * **Github repo:** [https://github.com/kyverno/policies/](https://github.com/kyverno/policies/) - The source code for the policy library, allowing you to contribute or policies.
 
-## Tools for Testing
-
-* **Kyverno CLI:** [Guide](https://kyverno.io/docs/kyverno-cli/) - A tool for performing unit tests on Kyverno policies.
-* **Chainsaw:** [Guide](https://kyverno.github.io/chainsaw/0.2.3/quick-start/) - A framework for E2E testing of policies.
 
 ## Setting up the Workshop Environment
 
@@ -39,8 +36,6 @@ To get the most out of this workshop, you'll need the following:
    ```
    helm install kyverno --namespace kyverno --create-namespace kyverno/kyverno
    ```
-* **Install Kyverno CLI:** [Install Guide](https://kyverno.io/docs/kyverno-cli/install/)
-* **Install Chainsaw** [Install Guide](https://kyverno.github.io/chainsaw/latest/quick-start/install/)
 
 ## Workshop Agenda
 
