@@ -37,7 +37,6 @@ To get the most out of this workshop, you'll need the following:
   helm install nirmata-kube-controller nirmata/nirmata-kube-controller \
   --version 0.3.15 -n nirmata --create-namespace \
   --set cluster.name=nirmata-test \
-  --set apiToken=Nv27jxE9vHyhHpyiygWYKUEhjCQQS/j3LWeDeju2ciBrFHqJnSv5zFHSK+FVC+9VL8I/b4nsZaUPo8WWnbAYcw== \
   --set features.policyExceptions.enabled=true \
   --set features.policySets.enabled=true \
   --set apiToken=<your-api-token>
