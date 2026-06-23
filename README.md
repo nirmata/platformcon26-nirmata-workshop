@@ -14,6 +14,7 @@ To get the most out of this workshop, you'll need the following:
 * An IDE/ vim to customize the policies
 * [Nirmata CLI](https://docs.nirmata.io/docs/nctl/installation/)
 * Nirmata Account created [here](try.nirmata.io)
+* Navigate to Nirmata account --> Setting --> Profile and copy the token
 
 ## Kyverno Documentation & Resources
 
@@ -35,11 +36,11 @@ To get the most out of this workshop, you'll need the following:
    ```
   helm install nirmata-kube-controller nirmata/nirmata-kube-controller \
   --version 0.3.15 -n nirmata --create-namespace \
-  --set cluster.name=rfeds \
+  --set cluster.name=nirmata-test \
   --set apiToken=Nv27jxE9vHyhHpyiygWYKUEhjCQQS/j3LWeDeju2ciBrFHqJnSv5zFHSK+FVC+9VL8I/b4nsZaUPo8WWnbAYcw== \
   --set features.policyExceptions.enabled=true \
   --set features.policySets.enabled=true \
-  --set clusterOnboardingToken=MGZiNjk2YzYtNzNlOC00YzQzLWI3MDItNmE5MGVlMTAxMWQ0
+  --set apiToken=<your-api-token>
    ```
    * **Step 3:** Install Enterprise Kyverno
    ```
