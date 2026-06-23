@@ -49,7 +49,7 @@ To get the most out of this workshop, you'll need the following:
   --set features.policyExceptions.enabled=true
    ```
 
-    * **Step 3:** Install the Nirmata Kyverno Operator
+    * **Step 4:** Install the Nirmata Kyverno Operator
    ```
   helm install kyverno-operator nirmata/nirmata-kyverno-operator \
   --version 0.9.1 -n nirmata-system \
