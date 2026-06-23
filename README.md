@@ -1,4 +1,21 @@
-# AWS Modernization with Nirmata
+
+# PaC-workshop with Kyverno
+
+## Pre-Requisites
+To get the most out of this workshop, you'll need the following:
+
+* **kubectl** [Install kubectl](https://kubernetes.io/docs/tasks/tools/)
+* **kustomize** [Install kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
+* Access to a Kubernetes cluster.  You can use a local single-node cluster environment such as:
+   * **kind:** [Installation Guide](https://kind.sigs.k8s.io/docs/user/quick-start/)
+   * **minikube:** [Installation Guide/](https://minikube.sigs.k8s.io/docs/start/)
+   * **k3d:** [Installation Guide](https://k3d.io/v5.4.6/usage/)
+* Docker Desktop [Installation Guide](https://docs.docker.com/desktop/)
+* **helm:** To install Kyverno OSS [Install helm](https://helm.sh/docs/intro/install/)
+* An IDE/ vim to customize the policies
+* [Nirmata CLI](https://docs.nirmata.io/docs/nctl/installation/)
+
+  
 
 Workshop lab guide for extending governance to Kubernetes clusters using Nirmata Cluster Control Point and Kyverno.
 
