@@ -63,6 +63,7 @@ To get the most out of this workshop, you'll need the following:
 ```
     kustomize build https://github.com/nirmata/kyverno-policies/pod-security/audit | kubectl apply -f - 
   ```
-   
+
+   reference here: https://github.com/nirmata/kyverno-policies/tree/main/pod-security 
 
 
