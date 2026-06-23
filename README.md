@@ -4,6 +4,7 @@
 To get the most out of this workshop, you'll need the following:
 
 * **kubectl** [Install kubectl](https://kubernetes.io/docs/tasks/tools/)
+* **kustomize** [Install kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
 * Access to a Kubernetes cluster.  You can use a local single-node cluster environment such as:
    * **kind:** [Installation Guide](https://kind.sigs.k8s.io/docs/user/quick-start/)
    * **minikube:** [Installation Guide/](https://minikube.sigs.k8s.io/docs/start/)
@@ -56,29 +57,12 @@ To get the most out of this workshop, you'll need the following:
   --create-namespace \
   --set enablePolicyset=true
    ```
+   
+ * **Step 5:** Deploy pod secuPolicies 
 
-## Workshop Agenda
+```
+    kustomize build https://github.com/nirmata/kyverno-policies/pod-security/audit | kubectl apply -f - 
+  ```
+   
 
 
-This workshop is structured to guide you from the fundamentals of Kyverno to more advanced use cases.
-
-**1. Introduction to Kyverno**
-
-* Overview of Policy-as-Code.
-* Kyverno's architecture and core concepts.
-
-**2. Writing Validation Policies**
-
-   We'll focus on writing, deploying, and testing validation policies to enforce constraints on Kubernetes resources.
-
-   * **Governance:** [Require Labels](https://github.com/nirmata/nirmata-kyverno-workshop/tree/main/Labs/require-labels) - Ensure that specific labels are applied to resources for organizational and management purposes.
-   * **Pod Security:** [Disallow Privileged Containers](https://github.com/nirmata/nirmata-kyverno-workshop/tree/main/Labs/disallow-privileged-containers) - Implement policies to enforce security best practices for Pods.
-
-**3. Advanced Kyverno Policy Use Cases**
-
-   Explore Kyverno's powerful capabilities beyond basic validation.
-
-   * **[Mutating Policy](https://github.com/nirmata/nirmata-kyverno-workshop/tree/main/Demos/01-mutation-policies):** Automatically modify resources, such as adding defaults or annotations.
-   * **[Generating Policy](https://github.com/nirmata/nirmata-kyverno-workshop/tree/main/Demos/02-generation-policies):** Create new Kubernetes resources based on existing ones, automating tasks like creating ConfigMaps or Secrets.
-   * **[Image Verification Policy](https://github.com/nirmata/nirmata-kyverno-workshop/tree/main/Demos/03-image-verification):** Implement policies to ensure that only trusted container images are deployed in your cluster, enhancing security.
-   * **[Resource Optimization](https://github.com/nirmata/nirmata-kyverno-workshop/tree/main/Demos/04-resource-optimization):** Explore policies that can help optimize resource utilization.
