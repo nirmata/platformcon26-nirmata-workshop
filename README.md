@@ -198,21 +198,8 @@ Use validationFailureAction Enforce.
 
 Review the generated output.
 
-If you need a known-good reference policy, use this:
 
-```bash
-kubectl apply -f policies/ai-workload-standards.yaml
-```
-
-Or create it manually:
-
-```bash
-cat << 'EOF' > ai-workload-standards.yaml
-# See policies/ai-workload-standards.yaml in this repository for the full policy.
-EOF
-```
-
-The reference policy is available at [`policies/ai-workload-standards.yaml`](policies/ai-workload-standards.yaml).
+The reference policies is available at [`policies/ai-workload-standards.yaml`](policies/ai-workload-standards.yaml).
 
 ## Sample Application
 
