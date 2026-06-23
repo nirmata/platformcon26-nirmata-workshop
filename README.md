@@ -58,10 +58,14 @@ To get the most out of this workshop, you'll need the following:
   --set enablePolicyset=true
    ```
    
- * **Step 5:** Deploy pod secuPolicies 
+ * **Step 5:** Deploy pod security Policies and Sample app
 
 ```
     kustomize build https://github.com/nirmata/kyverno-policies/pod-security/audit | kubectl apply -f - 
+
+    cd sample-app/app.yaml 
+    kubectl create ns sample-app
+    kubectl apply -f app.yaml -n sample-app
   ```
 
    reference here: https://github.com/nirmata/kyverno-policies/tree/main/pod-security 
