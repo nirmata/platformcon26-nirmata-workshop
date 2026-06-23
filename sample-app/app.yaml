@@ -1,0 +1,255 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-11-20T20:39:49Z"
+    generation: 2
+    name: api-echo
+    resourceVersion: "28372081"
+    uid: 68ce1f0a-3b51-4bc3-96d5-93b24c277b3b
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: api-echo
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: api-echo
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "3600"
+          image: busybox
+          imagePullPolicy: Always
+          name: api-echo
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /host
+            name: host-volume
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc
+            type: ""
+          name: host-volume
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-11-20T20:39:47Z"
+    generation: 2
+    name: app-alpha
+    resourceVersion: "28372093"
+    uid: e113bd61-8bd8-42f7-aa56-6b4ab25fd418
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: app-alpha
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: app-alpha
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "3600"
+          image: busybox
+          imagePullPolicy: Always
+          name: app-alpha
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /host
+            name: host-volume
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc
+            type: ""
+          name: host-volume
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-11-20T20:39:48Z"
+    generation: 3
+    name: backend-charlie
+    resourceVersion: "28372262"
+    uid: 3310da77-d1c5-45d9-a9fa-a28aca54dc0b
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: backend-charlie
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: backend-charlie
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "3600"
+          image: busybox
+          imagePullPolicy: Always
+          name: backend-charlie
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /host
+            name: host-volume
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc
+            type: ""
+          name: host-volume
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-11-20T20:39:48Z"
+    generation: 2
+    name: frontend-delta
+    resourceVersion: "28372115"
+    uid: 66d64504-14b9-4b7b-82c9-ebe771789944
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: frontend-delta
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: frontend-delta
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "3600"
+          image: busybox
+          imagePullPolicy: Always
+          name: frontend-delta
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /host
+            name: host-volume
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc
+            type: ""
+          name: host-volume
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-11-20T20:39:48Z"
+    generation: 2
+    name: service-bravo
+    resourceVersion: "28372127"
+    uid: 75c922d3-f189-433a-b079-0135d4245112
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: service-bravo
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: service-bravo
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "3600"
+          image: busybox
+          imagePullPolicy: Always
+          name: service-bravo
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /host
+            name: host-volume
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc
+            type: ""
+          name: host-volume
+kind: List
+metadata:
+  resourceVersion: ""
