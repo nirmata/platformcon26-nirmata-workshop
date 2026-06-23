@@ -1,0 +1,95 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: ai-workloads-pod-standards
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/description: >-
+      Enforces production-grade standards for Pods in the ai-workloads namespace.
+      Requires all containers to define CPU and memory requests and limits,
+      liveness and readiness probes, a nodeSelector targeting the general-purpose
+      Karpenter node pool, and disables automatic service account token mounting.
+    policies.kyverno.io/minversion: 1.11.0
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/title: AI Workloads Pod Standards
+spec:
+  background: true
+  validationFailureAction: Enforce
+  rules:
+    - name: require-resource-requests-and-limits
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - ai-workloads
+              operations:
+                - CREATE
+                - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: >-
+                object.spec.containers.all(c, has(c.resources) && has(c.resources.requests)
+                && has(c.resources.requests.cpu) && has(c.resources.requests.memory)
+                && has(c.resources.limits) && has(c.resources.limits.cpu) && has(c.resources.limits.memory))
+                && object.spec.?initContainers.orValue([]).all(c, has(c.resources)
+                && has(c.resources.requests) && has(c.resources.requests.cpu) && has(c.resources.requests.memory)
+                && has(c.resources.limits) && has(c.resources.limits.cpu) && has(c.resources.limits.memory))
+              message: All containers (including init containers) must define CPU and memory requests and limits.
+    - name: require-liveness-and-readiness-probes
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - ai-workloads
+              operations:
+                - CREATE
+                - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: object.spec.containers.all(c, has(c.livenessProbe) && has(c.readinessProbe))
+              messageExpression: >-
+                'All containers must define livenessProbe and readinessProbe.
+                Containers missing probes: ' + object.spec.containers.filter(c, !has(c.livenessProbe)
+                || !has(c.readinessProbe)).map(c, c.name).join(', ')
+    - name: require-karpenter-nodepool-selector
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - ai-workloads
+              operations:
+                - CREATE
+                - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: >-
+                has(object.spec.nodeSelector) && 'karpenter.sh/nodepool' in object.spec.nodeSelector
+                && object.spec.nodeSelector['karpenter.sh/nodepool'] == 'general-purpose'
+              message: "Pod spec must include nodeSelector with 'karpenter.sh/nodepool: general-purpose'."
+    - name: require-no-automount-service-account-token
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - ai-workloads
+              operations:
+                - CREATE
+                - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: object.spec.?automountServiceAccountToken.orValue(true) == false
+              message: Pod spec must explicitly set automountServiceAccountToken to false.
