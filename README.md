@@ -12,6 +12,7 @@ To get the most out of this workshop, you'll need the following:
 * **helm:** To install Kyverno OSS [Install helm](https://helm.sh/docs/intro/install/)
 * An IDE/ vim to customize the policies
 * [Nirmata CLI](https://docs.nirmata.io/docs/nctl/installation/)
+* Nirmata Account created [here](try.nirmata.io)
 
 ## Kyverno Documentation & Resources
 
@@ -23,18 +24,37 @@ To get the most out of this workshop, you'll need the following:
 
 ## Setting up the Workshop Environment
 
-* **Installing Kyverno OSS**
-   * **Step 1:** Add the Kyverno helm chart to the list
+* **Onboarding Cluster in Nirmata**
+   * **Step 1:** Add the Nirmata helm chart to the list
    ```
-   helm repo add kyverno https://kyverno.github.io/kyverno && helm repo update
+   helm repo add nirmata https://nirmata.github.io/kyverno-charts/
+   helm repo update nirmata
    ```
-   * **Step 2:** Get the Kyverno OSS chart list
+   * **Step 2:** Install Nirmata Kube Controller
    ```
-   helm search repo kyverno -l
+  helm install nirmata-kube-controller nirmata/nirmata-kube-controller \
+  --version 0.3.15 -n nirmata --create-namespace \
+  --set cluster.name=rfeds \
+  --set apiToken=Nv27jxE9vHyhHpyiygWYKUEhjCQQS/j3LWeDeju2ciBrFHqJnSv5zFHSK+FVC+9VL8I/b4nsZaUPo8WWnbAYcw== \
+  --set features.policyExceptions.enabled=true \
+  --set features.policySets.enabled=true \
+  --set clusterOnboardingToken=MGZiNjk2YzYtNzNlOC00YzQzLWI3MDItNmE5MGVlMTAxMWQ0
    ```
-   * **Step 3:** Install Kyverno OSS (Installs the latest Kyverno OSS)
+   * **Step 3:** Install Enterprise Kyverno
    ```
-   helm install kyverno --namespace kyverno --create-namespace kyverno/kyverno
+  helm install kyverno nirmata/kyverno \
+  --version 3.7.1 -n kyverno --create-namespace \
+  --set features.policyExceptions.namespace="kyverno" \
+  --set crds.reportsServer.enabled=false \
+  --set features.policyExceptions.enabled=true
+   ```
+
+    * **Step 3:** Install the Nirmata Kyverno Operator
+   ```
+  helm install kyverno-operator nirmata/nirmata-kyverno-operator \
+  --version 0.9.1 -n nirmata-system \
+  --create-namespace \
+  --set enablePolicyset=true
    ```
 
 ## Workshop Agenda
