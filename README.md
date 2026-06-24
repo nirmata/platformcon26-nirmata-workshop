@@ -186,20 +186,13 @@ This will provide you with an overview of your cluster.
 Use the following prompt to generate a policy that governs the AI workloads:
 
 ```
-Generate a Kyverno ClusterPolicy for Pods in the ai-workloads namespace that requires:
-
-1. CPU and memory requests and limits
-2. livenessProbe and readinessProbe
-3. nodeSelector karpenter.sh/nodepool=general-purpose
-4. automountServiceAccountToken set to false
-
-Use validationFailureAction Enforce.
+Create a policy that validates all pods with label foo: bar, along with testcases
 ```
 
 Review the generated output.
 
 
-The reference policies is available at [`policies/ai-workload-standards.yaml`](policies/ai-workload-standards.yaml).
+The reference policies are available at [`policies/ai-workload-standards.yaml`](policies/ai-workload-standards.yaml).
 
 ## Sample Application
 
